@@ -36,8 +36,8 @@ Open <http://localhost:4173>.
 
 The visual system uses a clean, flat dashboard language:
 
-- teal for structure and focus
-- orange for the primary action
+- white and cool gray surfaces with blue for structure and focus
+- pink/red only for the error form and validation states
 - rose / blue / green for the three review states
 - high-contrast surfaces and visible focus states
 - compact density with generous line height for reading bilingual pairs
