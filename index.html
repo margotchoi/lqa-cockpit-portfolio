@@ -15,7 +15,7 @@
       rel="stylesheet"
     />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./styles.css?v=2" />
+    <link rel="stylesheet" href="./styles.css?v=3" />
   </head>
   <body>
     <a class="skip-link" href="#review-workspace">Skip to review workspace</a>
@@ -94,6 +94,7 @@
             <button class="icon-button" id="themeToggle" type="button" aria-label="Switch color theme" data-tip="Toggle light / dark">
               <span id="themeIcon" aria-hidden="true">☾</span>
             </button>
+            <button class="ghost-button compact" id="resetDemo" type="button" data-tip="Reset all review decisions">Reset</button>
             <button class="primary-button compact" id="saveDraft" type="button">Save draft</button>
           </div>
         </header>
@@ -130,9 +131,13 @@
                   <div class="text-label">Source <button class="copy-button" type="button" data-copy="source" aria-label="Copy source">Copy</button></div>
                   <div class="text-value" id="sourceText"></div>
                 </div>
-                <div class="text-block">
-                  <div class="text-label">Target <button class="copy-button" type="button" data-copy="target" aria-label="Copy target">Copy</button></div>
+                <div class="text-block" id="targetBlock">
+                  <div class="text-label">
+                    <span class="target-label-group">Target <span class="target-updated-badge" id="targetUpdatedBadge" hidden>Updated</span></span>
+                    <button class="copy-button" type="button" data-copy="target" aria-label="Copy target">Copy</button>
+                  </div>
                   <div class="text-value target" id="targetText"></div>
+                  <div class="target-original" id="targetOriginal" hidden></div>
                 </div>
               </div>
 
@@ -143,9 +148,17 @@
                   <div class="eyebrow">AI PROPOSALS</div>
                   <h3>Review suggestions</h3>
                 </div>
-                <div class="shortcut-legend"><kbd id="modKey">⌘</kbd><span>+</span><kbd>1–9</kbd><span>accept</span></div>
+                <div class="shortcut-legend"><kbd>1–9</kbd><span>accept</span><kbd>⇧</kbd><span>+</span><kbd>1–9</kbd><span>reject</span></div>
               </div>
               <div class="proposal-list" id="proposalList"></div>
+
+              <div class="completion-banner" id="completionBanner" hidden>
+                <div>
+                  <strong>All 8 keys confirmed</strong>
+                  <span id="completionSummary">Queue review complete.</span>
+                </div>
+                <button class="ghost-button" id="resetFromBanner" type="button">Start over</button>
+              </div>
 
               <div class="review-footer">
                 <div class="keyboard-hint">
@@ -155,7 +168,7 @@
                 <div class="footer-actions">
                   <button class="ghost-button" id="prevKey" type="button">Previous</button>
                   <button class="ghost-button" id="nextKey" type="button">Next</button>
-                  <span class="tooltip-wrap" data-tip="Confirm this key and jump to the next unconfirmed key">
+                  <span class="tooltip-wrap" id="confirmTooltip" data-tip="Confirm this key and jump to the next unconfirmed key">
                     <button class="confirm-button" id="confirmKey" type="button">Confirm <span class="shortcut-inline" id="confirmShortcut">⌘↵</span></button>
                   </span>
                 </div>
@@ -169,7 +182,7 @@
                 <div class="eyebrow">EVIDENCE</div>
                 <h2>Auxiliary Panel</h2>
               </div>
-              <span class="signal" aria-label="AI confidence high">● High signal</span>
+              <span class="signal" id="signalBadge" aria-label="AI confidence high">● High signal</span>
             </div>
 
             <section class="evidence-card highlighted" id="decisionCard">
@@ -184,7 +197,7 @@
             <section class="evidence-card">
               <div class="card-topline">
                 <span class="mini-label">Corpus evidence</span>
-                <span class="mini-label muted">2 rows</span>
+                <span class="mini-label muted" id="corpusCount">2 rows</span>
               </div>
               <div id="corpusList"></div>
             </section>
@@ -211,6 +224,6 @@
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="./app.js?v=2"></script>
+    <script src="./app.js?v=3"></script>
   </body>
 </html>
