@@ -18,9 +18,9 @@ flowchart LR
 
 A key has:
 
-- `source` and `target`
+- `source` and `target` (plus an `effectiveTarget` derived from accepted or edited proposals)
 - zero or more AI proposals
-- a human review state for each proposal (`pending`, `accepted`, `rejected`)
+- an indexed human review state for each proposal (`pending`, `accepted`, `rejected`) and optional inline edit override
 - evidence: rationale, corpus rows, glossary terms, consistency signal
 - `confirmed`
 

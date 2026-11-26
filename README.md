@@ -10,14 +10,16 @@ The demo explores a common review problem: a linguist has a queue of strings, AI
 
 - Review queue with problem / preferential / clean buckets
 - Source and target text with inline copy actions
-- Multiple AI proposals per key
-- Accept, reject, and edit affordances
+- Multiple AI proposals per key (Major, Minor, and Preferential severities)
+- Accept, reject, and inline edit affordances that update the target text live while preserving the original string for comparison
 - Evidence panel: rationale, corpus rows, glossary, and a consistency check
-- Keyboard-first review:
-  - `⌘/Ctrl + 1…9` — accept the numbered AI proposal
+- Keyboard-first review (using browser-safe shortcuts that do not collide with tab switching):
+  - `1…9` — accept the numbered AI proposal
+  - `⇧ + 1…9` — reject the numbered AI proposal
   - `⌘/Ctrl + Enter` — confirm the key
   - `J` / `K` or arrow keys — move through the queue
-- Confirm advances to the next unconfirmed key
+- Confirm advances to the next unconfirmed key and summarizes completion when all keys are reviewed
+- Local draft persistence (`Save draft` / `Reset`) via `localStorage`
 - Immediate hover tooltips for shortcut-bearing controls
 - Light / dark theme and a responsive layout
 
@@ -69,6 +71,7 @@ The shortcut is printed in the proposal row and in a tooltip. It is not hidden b
 ├── index.html       # semantic demo shell
 ├── styles.css       # design tokens, layout, responsive states
 ├── app.js           # mock data and interaction state
+├── LICENSE          # MIT license
 └── docs/
     └── architecture.md
 ```
