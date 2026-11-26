@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="LQA Cockpit — a portfolio demo of a localization QA review workspace with AI proposals, evidence, and keyboard-first review."
+    />
+    <title>LQA Cockpit — Localization QA Review</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#review-workspace">Skip to review workspace</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Review queue">
+        <div class="brand-row">
+          <div class="brand-mark" aria-hidden="true">LC</div>
+          <div>
+            <div class="brand-name">LQA Cockpit</div>
+            <div class="brand-sub">Localization review workspace</div>
+          </div>
+        </div>
+
+        <div class="workspace-label">PORTFOLIO DEMO</div>
+
+        <nav class="primary-nav" aria-label="Main navigation">
+          <button class="nav-item nav-item-active" type="button">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            Review queue
+            <span class="nav-count" id="navCount">8</span>
+          </button>
+          <button class="nav-item" type="button" data-soon="Insights are part of the full product.">
+            <span class="nav-icon" aria-hidden="true">◔</span>
+            Quality insights
+          </button>
+          <button class="nav-item" type="button" data-soon="Assets are part of the full product.">
+            <span class="nav-icon" aria-hidden="true">◇</span>
+            Language assets
+          </button>
+        </nav>
+
+        <section class="queue-overview" aria-labelledby="queueTitle">
+          <div class="section-heading">
+            <h2 id="queueTitle">Weekly review</h2>
+            <span class="locale-chip">EN → KO</span>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <span id="progressBar"></span>
+          </div>
+          <div class="progress-meta">
+            <span id="progressText">0 / 8 confirmed</span>
+            <span id="progressPct">0%</span>
+          </div>
+        </section>
+
+        <div class="filter-bar" role="group" aria-label="Filter keys">
+          <button class="filter is-active" type="button" data-filter="all">All <span id="countAll">8</span></button>
+          <button class="filter" type="button" data-filter="problem">Problem <span id="countProblem">3</span></button>
+          <button class="filter" type="button" data-filter="preferential">Pref <span id="countPref">2</span></button>
+          <button class="filter" type="button" data-filter="clean">Clean <span id="countClean">3</span></button>
+        </div>
+
+        <div class="key-list" id="keyList" aria-label="Keys"></div>
+
+        <div class="sidebar-foot">
+          <div class="avatar" aria-hidden="true">AC</div>
+          <div>
+            <div class="foot-name">Alex Chen</div>
+            <div class="foot-role">Linguist · KO-KR</div>
+          </div>
+          <button class="icon-button" type="button" aria-label="Open settings" data-soon="Settings are part of the full product.">⚙</button>
+        </div>
+      </aside>
+
+      <main class="main" id="review-workspace">
+        <header class="topbar">
+          <div class="breadcrumb">
+            <span>Workspace</span>
+            <span aria-hidden="true">/</span>
+            <span>Weekly review</span>
+            <span aria-hidden="true">/</span>
+            <strong id="breadcrumbKey">hotel.booking.free_cancellation.title</strong>
+          </div>
+          <div class="top-actions">
+            <span class="mock-badge">Mock data</span>
+            <button class="icon-button" id="themeToggle" type="button" aria-label="Switch color theme" data-tip="Toggle light / dark">
+              <span id="themeIcon" aria-hidden="true">☾</span>
+            </button>
+            <button class="primary-button compact" id="saveDraft" type="button">Save draft</button>
+          </div>
+        </header>
+
+        <div class="workspace">
+          <section class="review-column" aria-label="Selected key review">
+            <div class="project-strip">
+              <div>
+                <div class="eyebrow">TRAVEL CONTENT · UI</div>
+                <h1>Weekly localization review</h1>
+                <p class="project-meta">Sample project · English → Korean · Marketing &amp; UI</p>
+              </div>
+              <div class="project-stats">
+                <div><strong id="statProblem">3</strong><span>problems</span></div>
+                <div><strong id="statPref">2</strong><span>preferential</span></div>
+                <div><strong id="statConfirmed">0</strong><span>confirmed</span></div>
+              </div>
+            </div>
+
+            <article class="key-card" aria-labelledby="keyName">
+              <div class="key-card-head">
+                <div>
+                  <div class="key-kicker">KEY <span id="keyIndex">1 / 8</span></div>
+                  <h2 id="keyName">hotel.booking.free_cancellation.title</h2>
+                </div>
+                <div class="key-badges">
+                  <span class="severity-badge" id="keyBucket">Problem</span>
+                  <span class="status-badge" id="keyStatus">Unconfirmed</span>
+                </div>
+              </div>
+
+              <div class="text-pair">
+                <div class="text-block">
+                  <div class="text-label">Source <button class="copy-button" type="button" data-copy="source" aria-label="Copy source">Copy</button></div>
+                  <div class="text-value" id="sourceText"></div>
+                </div>
+                <div class="text-block">
+                  <div class="text-label">Target <button class="copy-button" type="button" data-copy="target" aria-label="Copy target">Copy</button></div>
+                  <div class="text-value target" id="targetText"></div>
+                </div>
+              </div>
+
+              <div class="meta-row" id="metaRow"></div>
+
+              <div class="ai-heading">
+                <div>
+                  <div class="eyebrow">AI PROPOSALS</div>
+                  <h3>Review suggestions</h3>
+                </div>
+                <div class="shortcut-legend"><kbd id="modKey">⌘</kbd><span>+</span><kbd>1–9</kbd><span>accept</span></div>
+              </div>
+              <div class="proposal-list" id="proposalList"></div>
+
+              <div class="review-footer">
+                <div class="keyboard-hint">
+                  <span><kbd>J</kbd><kbd>K</kbd> move</span>
+                  <span><kbd id="modKey2">⌘</kbd><kbd>Enter</kbd> confirm</span>
+                </div>
+                <div class="footer-actions">
+                  <button class="ghost-button" id="prevKey" type="button">Previous</button>
+                  <button class="ghost-button" id="nextKey" type="button">Next</button>
+                  <span class="tooltip-wrap" data-tip="Confirm this key and jump to the next unconfirmed key">
+                    <button class="confirm-button" id="confirmKey" type="button">Confirm <span class="shortcut-inline" id="confirmShortcut">⌘↵</span></button>
+                  </span>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <aside class="evidence-column" aria-label="Evidence panel">
+            <div class="panel-heading">
+              <div>
+                <div class="eyebrow">EVIDENCE</div>
+                <h2>Why this key was flagged</h2>
+              </div>
+              <span class="signal" aria-label="AI confidence high">● High signal</span>
+            </div>
+
+            <section class="evidence-card highlighted" id="decisionCard">
+              <div class="card-topline">
+                <span class="mini-label">AI rationale</span>
+                <span class="mini-label muted" id="decisionLabel">Problem</span>
+              </div>
+              <p id="rationaleText"></p>
+              <div class="rationale-foot" id="rationaleFoot"></div>
+            </section>
+
+            <section class="evidence-card">
+              <div class="card-topline">
+                <span class="mini-label">Corpus evidence</span>
+                <span class="mini-label muted">2 rows</span>
+              </div>
+              <div id="corpusList"></div>
+            </section>
+
+            <section class="evidence-card">
+              <div class="card-topline">
+                <span class="mini-label">Terminology</span>
+                <span class="mini-label muted">Glossary</span>
+              </div>
+              <div id="glossaryList"></div>
+            </section>
+
+            <section class="evidence-card consistency-card" id="consistencyCard">
+              <div class="card-topline">
+                <span class="mini-label">Consistency check</span>
+                <span class="check-status" id="consistencyStatus">Review</span>
+              </div>
+              <p id="consistencyText"></p>
+              <div class="consistency-track" aria-hidden="true"><span id="consistencyBar"></span></div>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
